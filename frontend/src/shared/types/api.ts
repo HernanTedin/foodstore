@@ -15,3 +15,11 @@ export interface ApiError {
   code: string;
   field: string | null;
 }
+/** Respuesta paginada: ?page=1&size=20 → { items, total, page, size, pages } */
+export interface Paginated<T> {
+  items: T[];
+  total: number;
+  page: number;
+  size: number;
+  pages: number;
+}

@@ -41,7 +41,7 @@ export const NAV: NavItem[] = [
     roles: ["ADMIN", "STOCK"],
     disponible: false,
   },
-  { label: "Usuarios", to: "/usuarios", roles: ["ADMIN"], disponible: false },
+  { label: "Usuarios", to: "/Usuarios", roles: ["ADMIN"], disponible: false },
   {
     label: "Configuración",
     to: "/configuracion",

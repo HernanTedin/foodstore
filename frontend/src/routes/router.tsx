@@ -4,6 +4,8 @@ import LoginPage from "@/features/auth/pages/LoginPage";
 import PanelPage from "@/pages/PanelPage";
 import { useAuthStore } from "@/store/authStore";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
+import { ErrorPage, SuccessPage } from "@/pages/ResultPage";
+import UsuariosPage from "@/features/usuarios/pages/UsuariosPage";
 /** Ruta protegida: sin sesión, redirige al login. */
 // eslint-disable-next-line react-refresh/only-export-components
 function Protegida({ children }: { children: React.ReactNode }) {
@@ -17,6 +19,9 @@ function Protegida({ children }: { children: React.ReactNode }) {
 export const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
+  { path: "success", element: <SuccessPage /> },
+  { path: "error", element: <ErrorPage /> },
+  { path: "usuarios", element: <UsuariosPage /> },
   {
     path: "/",
     element: (
