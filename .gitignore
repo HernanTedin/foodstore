@@ -1,0 +1,25 @@
+# Secretos
+.env
+*.env.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Frontend
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Archivos subidos
+backend/media/*
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
