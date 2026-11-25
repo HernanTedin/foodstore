@@ -1,75 +1,46 @@
-# React + TypeScript + Vite
+# Food Store · Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz web de Food Store, hecha con React 19, TypeScript, Vite y Tailwind CSS 4.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 20 o superior
+- El backend corriendo en `http://127.0.0.1:8000` (ver el README de la raíz)
 
-## React Compiler
+## Cómo correrlo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Desde esta carpeta (`frontend`):
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+La aplicación queda en `http://localhost:5173`. Las llamadas a `/api` y `/media` se redirigen solas al backend (configurado en `vite.config.ts`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Revisa los tipos y genera la versión para producción |
+| `npm run preview` | Sirve la versión de producción generada |
+
+## Estructura
 
 ```
+src/
+├── shared/    # Piezas reutilizables: api, componentes, layout, ui
+├── features/  # Una carpeta por módulo (auth, usuarios, direcciones…)
+├── store/     # Estado del cliente (Zustand)
+├── routes/    # Rutas de la aplicación
+├── pages/     # Páginas generales
+└── styles/    # Estilos globales y colores
+```
+
+## Decisiones técnicas
+
+- **Estado del servidor:** TanStack Query (listas, cachés y recargas).
+- **Estado del cliente:** Zustand (sesión y modal de confirmación).
+- **Sesión:** los tokens viajan en cookies HttpOnly; el frontend nunca los lee.
+- **Confirmaciones y resultados:** modal propio y páginas `/success` y `/error`, sin `window.confirm` ni avisos flotantes.
