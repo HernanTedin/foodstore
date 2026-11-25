@@ -48,4 +48,10 @@ export const NAV: NavItem[] = [
     roles: ["ADMIN"],
     disponible: false,
   },
+  {
+    label: "Direcciones",
+    to: "/direcciones",
+    roles: ["CLIENT"],
+    disponible: true,
+  },
 ];
